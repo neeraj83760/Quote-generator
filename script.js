@@ -3,14 +3,33 @@ const quoteText = document.getElementById('quote')
 const authorText = document.getElementById('author')
 const twitterBtn = document.getElementById('twitter')
 const newQuoteBtn = document.getElementById('new-quote')
+const loader  =  document.getElementById('loader')
 
 // Get Quotes from API
 
 let apiQuotes = []; 
 
+// Show loading 
+
+function loading(){
+
+    loader.hidden = false;
+    quoteContainer.hidden = true; 
+
+}
+
+// Hide Loading 
+function complete(){
+
+    quoteContainer.hidden = false;
+    loader.hidden = true; 
+}
+
 // Show New Quote 
 
 function newQuote(){
+
+ loading();    
 // Pick a random Quote from ApiQuotes array
 
 const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
@@ -38,14 +57,18 @@ else{
 
     quoteText.classList.remove('long-quote')
 }
-    quoteText.textContent = quote.text;  
+
+//  Set the Quote and hide the loader 
+    quoteText.textContent = quote.text;
+    complete();  
 
 
 // console.log(quote); 
 }
 
 async function getQuotes() {
-
+    // loading function shows how the code is loading 
+    loading();
     const apiUrl = 'https://type.fit/api/quotes';
 
     try {
