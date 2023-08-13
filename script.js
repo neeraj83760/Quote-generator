@@ -4,22 +4,21 @@ const authorText = document.getElementById('author')
 const twitterBtn = document.getElementById('twitter')
 const newQuoteBtn = document.getElementById('new-quote')
 const loader  =  document.getElementById('loader')
+const newShayaribtn = document.getElementById('shayari')
 
 // Get Quotes from API
 
 let apiQuotes = []; 
+let shayariAPI = [];
 
-// Show loading 
-
-function loading(){
+function showLoadingSpinner(){
 
     loader.hidden = false;
     quoteContainer.hidden = true; 
 
 }
 
-// Hide Loading 
-function complete(){
+function removeLoadingSpinner(){
 
     quoteContainer.hidden = false;
     loader.hidden = true; 
@@ -29,7 +28,7 @@ function complete(){
 
 function newQuote(){
 
- loading();    
+ showLoadingSpinner();    
 // Pick a random Quote from ApiQuotes array
 
 const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
@@ -60,7 +59,7 @@ else{
 
 //  Set the Quote and hide the loader 
     quoteText.textContent = quote.text;
-    complete();  
+    removeLoadingSpinner();   
 
 
 // console.log(quote); 
@@ -68,7 +67,7 @@ else{
 
 async function getQuotes() {
     // loading function shows how the code is loading 
-    loading();
+    showLoadingSpinner();
     const apiUrl = 'https://type.fit/api/quotes';
 
     try {
@@ -82,7 +81,7 @@ async function getQuotes() {
     } catch (error) {
         
         // Catch Error here 
-        
+    
 
     }
 
@@ -110,3 +109,70 @@ twitterBtn.addEventListener('click', tweetQuote);
 // onLoad
 
 getQuotes();
+
+// **************************Extra Code ************************************
+
+async function Shayari() {
+    // loading function shows how the code is loading 
+    // showLoadingSpinner();
+    const apiUrl = 'https://neeraj83760.github.io/shayariAPI/shayariAPI.json';
+
+    try {
+
+    const response = await fetch(apiUrl);
+    shayariAPI = await response.json();
+    
+    // newQuote();
+    console.log(shayariAPI);  
+        
+    } catch (error) {
+        
+        // Catch Error here 
+    
+
+    }
+
+}
+
+function newShayari(){
+
+    showLoadingSpinner();    
+   // Pick a random Quote from ApiQuotes array
+   
+   const quote = shayariAPI[Math.floor(Math.random() * shayariAPI.length)];
+   
+   // Check wether an author feild is blank or not and replace it with Unkonwn
+   
+   if(!quote.author){
+   
+       authorText.textContent = 'Unknown'
+   }
+   else {
+   
+       authorText.textContent = quote.author;
+   }
+   
+   // Check Quote length to determine the styling
+   // In If statement we are adding and removing the CSS class 
+   
+   if(quote.text.length > 30){
+   
+       quoteText.classList.add('long-quote') 
+   }
+   
+   else{
+   
+       quoteText.classList.remove('long-quote')
+   }
+   
+   //  Set the Quote and hide the loader 
+       quoteText.textContent = quote.text;
+       removeLoadingSpinner();   
+   
+   }
+
+//    Onload 
+
+Shayari(); 
+
+newShayaribtn.addEventListener('click', newShayari)
