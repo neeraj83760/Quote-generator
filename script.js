@@ -33,7 +33,7 @@ function newQuote(){
 
 const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
 
-// Check wether an author feild is blank or not and replace it with Unkonwn
+// Check wether an author field is blank or not and replace it with Unkonwn
 
 if(!quote.author){
 
