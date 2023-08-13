@@ -61,7 +61,7 @@ box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.2);
 
   margin-top: 15px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content:space-between;
 
 }
 
@@ -144,25 +144,23 @@ button:active{
     
   }
 
-  #twitter{
-
-
+  #twitter {
+     
     margin: 10px;
-  }
+  
+    }
 
-  #new-quote{
+    #new-quote{
+     
+      margin: 10px;
 
+    } 
+    
+    #shayari{
+   
+      margin: 10px;
 
-    margin: 10px;
-  }
-
-  #shayari{
-
-
-    margin: 10px;
-  }
-
-
+    }
   
 
 }
